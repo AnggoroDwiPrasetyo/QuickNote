@@ -1,0 +1,193 @@
+/* 1. Reset & Setup Font */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* 2. Kontainer Utama (Efek Glassmorphism) */
+main {
+    width: 100%;
+    max-width: 500px;
+    padding: 28px 32px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+}
+
+h1 {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #ffffff;
+}
+
+/* 3. Styling Formulir Input */
+#todo-form {
+    display: flex;
+    margin-bottom: 24px;
+}
+
+#todo-input {
+    flex-grow: 1;
+    padding: 14px 18px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 8px 0 0 8px;
+    color: #ffffff;
+    outline: none;
+    transition: background 0.2s;
+}
+
+#todo-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#todo-input:focus {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+#todo-form button {
+    padding: 14px 22px;
+    font-size: 16px;
+    font-weight: 500;
+    background: #00c6ff;
+    color: #111;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#todo-form button:hover {
+    background: #ffffff;
+    transform: scale(1.05);
+}
+
+/* 4. Styling Daftar Tugas (List Items) */
+#todo-list {
+    list-style-type: none;
+}
+
+#todo-list li {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    
+    /* --- (BARU) FITUR 2: Animasi Fade-in --- */
+    animation: fadeIn 0.4s ease-out;
+}
+
+#todo-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+#todo-list li span {
+    flex-grow: 1;
+    margin-right: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    
+    /* --- (MODIFIKASI) FITUR 1: Tambahkan kursor --- */
+    cursor: pointer; /* Menandakan teks bisa diklik */
+}
+
+/* 5. Styling Tombol Ikon (Edit & Hapus) */
+#todo-list .edit-btn,
+#todo-list .delete-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 8px;
+    padding: 8px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    transition: background-color 0.2s;
+    /* (BARU) Mencegah span ikut ter-klik saat tombol diklik */
+    position: relative; 
+    z-index: 2;
+}
+
+#todo-list .edit-btn:hover {
+    background-color: rgba(241, 196, 15, 0.3);
+}
+
+#todo-list .delete-btn:hover {
+    background-color: rgba(231, 76, 60, 0.3);
+}
+
+/* 6. Styling untuk Jam & Tanggal (Sudah ada) */
+#waktu-container {
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.9); 
+}
+#tampilan-tanggal {
+    font-size: 16px;
+    font-weight: 500;
+}
+#tampilan-jam {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+/* --- (BARU) 7. FITUR 1: Styling untuk Tugas Selesai --- */
+#todo-list li.completed span {
+    text-decoration: line-through; /* Efek coret */
+    opacity: 0.6; /* Dibuat sedikit redup */
+    text-decoration-thickness: 4px;
+}
+
+/* --- (BARU) 8. FITUR 2: Keyframes untuk Animasi Fade-in --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- (BARU) 9. FITUR 3: Styling Empty State --- */
+#todo-list li.empty-state {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+    justify-content: center; /* Teks di tengah */
+    padding: 20px !important;
+    animation: none; /* Matikan animasi fade-in untuk empty state */
+}
+
+#todo-list li.empty-state:hover {
+    transform: none !important; /* Matikan efek hover */
+    box-shadow: none !important;
+}
